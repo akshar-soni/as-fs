@@ -22,18 +22,14 @@ import interactionPlugin from '@fullcalendar/interaction';
 // Flat Picker
 import { FlatpickrModule } from 'angularx-flatpickr';
 // Simplebar
-import { SimplebarAngularModule } from 'simplebar-angular';
 // Ck Editer
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 // Counter
 import { CountToModule } from 'angular-count-to';
 // Apex Chart Package
-import { NgApexchartsModule } from 'ng-apexcharts';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 //  Drag and drop
-import { DndModule } from 'ngx-drag-drop';
-
 // Select Droup down
 import { NgSelectModule } from '@ng-select/ng-select';
 
@@ -47,16 +43,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 // Component Pages
 import { AppsRoutingModule } from "./apps-routing.module";
-import { SharedModule } from '../../shared/shared.module';
-import { CalendarComponent } from './calendar/calendar.component';
-import { ChatComponent } from './chat/chat.component';
-import { MailboxComponent } from './mailbox/mailbox.component';
-import { WidgetsComponent } from './widgets/widgets.component';
-import { EmailBasicComponent } from './email/email-basic/email-basic.component';
-import { EmailEcommerceComponent } from './email/email-ecommerce/email-ecommerce.component';
-import { FileManagerComponent } from './file-manager/file-manager.component';
-import { TodoComponent } from './todo/todo.component';
-
+import { SharedModule } from "../../shared/shared.module";
 import {DatePipe} from '@angular/common';
 
 import { SortByPipe } from '../apps/sort-by.pipe';
@@ -67,17 +54,7 @@ FullCalendarModule.registerPlugins([
 ]);
 
 @NgModule({
-  declarations: [
-    CalendarComponent,
-    ChatComponent,
-    MailboxComponent,
-    WidgetsComponent,
-    EmailBasicComponent,
-    EmailEcommerceComponent,
-    FileManagerComponent,
-    TodoComponent,
-    SortByPipe
-  ],
+  declarations: [SortByPipe],
   imports: [
     CommonModule,
     FormsModule,
@@ -87,32 +64,27 @@ FullCalendarModule.registerPlugins([
     NgbAccordionModule,
     NgbProgressbarModule,
     NgbNavModule,
-    NgbPaginationModule, 
+    NgbPaginationModule,
     NgbCollapseModule,
     FeatherModule.pick(allIcons),
     FullCalendarModule,
     FlatpickrModule.forRoot(),
-    SimplebarAngularModule,
     CKEditorModule,
     CountToModule,
-    NgApexchartsModule,
     LeafletModule,
     AppsRoutingModule,
     SharedModule,
     PickerModule,
-    DndModule,
     NgSelectModule,
     DragDropModule,
     MatTableModule,
     FlexLayoutModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
   ],
-  providers: [
-    DatePipe
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  providers: [DatePipe],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppsModule { 
+export class AppsModule {
   constructor() {
     defineLordIconElement(lottie.loadAnimation);
   }

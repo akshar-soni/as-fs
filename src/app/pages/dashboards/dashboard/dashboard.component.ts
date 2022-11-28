@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { circle, latLng, tileLayer } from 'leaflet';
-import { SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
-import { SwiperOptions } from 'swiper';
+import { circle, latLng, tileLayer } from "leaflet";
 
 import {BestSelling, TopSelling, RecentSelling, statData } from './data';
 import { ChartType } from './dashboard.model';
@@ -329,9 +327,6 @@ export class DashboardComponent implements OnInit {
       isSelected:false
     }
   };
-  @ViewChild(SwiperDirective) directiveRef?: SwiperDirective;
-  @ViewChild(SwiperComponent, { static: false }) componentRef?: SwiperComponent;
-
   constructor() {}
 
   ngOnInit(): void {
@@ -593,16 +588,6 @@ export class DashboardComponent implements OnInit {
       radius: 400000,
     }),
   ];
-
-  /**
-   * Swiper setting
-   */
-  public config: SwiperOptions = {
-    a11y: { enabled: true },
-    direction: "vertical",
-    slidesPerView: 2,
-    pagination: true,
-  };
 
   /**
    * Recent Activity

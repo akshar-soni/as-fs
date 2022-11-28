@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
-import { SimplebarAngularModule } from 'simplebar-angular';
-import { LanguageService } from '../core/services/language.service';
+import { NgbDropdownModule, NgbNavModule } from "@ng-bootstrap/ng-bootstrap";
 import { TranslateModule } from '@ngx-translate/core';
 
 // Component pages
@@ -32,16 +30,14 @@ import { TwoColumnSidebarComponent } from './two-column-sidebar/two-column-sideb
     HorizontalComponent,
     HorizontalTopbarComponent,
     TwoColumnComponent,
-    TwoColumnSidebarComponent
+    TwoColumnSidebarComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     NgbDropdownModule,
     NgbNavModule,
-    SimplebarAngularModule,
     TranslateModule,
   ],
-  providers: [LanguageService]
 })
-export class LayoutsModule { }
+export class LayoutsModule {}
