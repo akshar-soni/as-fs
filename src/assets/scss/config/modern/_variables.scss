@@ -94,9 +94,13 @@ $twocolumn-menu-item-active-bg-dark:             var(--#{$prefix}twocolumn-menu-
 $twocolumn-menu-item-color-gradient:              rgba($white, 0.6);
 
 // Topbar - (Default Light)
-$header-height:                                    70px;
+// $header-height:                                    70px;
+$header-height:                                    60px;
 $header-bg:                                      var(--#{$prefix}header-bg);
 $header-item-color:                              var(--#{$prefix}header-item-color);
+
+//dashboard page card height
+$wizard-card-height-suffix: 170px;
 
 // Topbar - Dark
 $header-bg-dark:                                 var(--#{$prefix}header-bg-dark);

@@ -5,8 +5,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CountToModule } from 'angular-count-to';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { SimplebarAngularModule } from 'simplebar-angular';
+import { NgbDropdownModule } from "@ng-bootstrap/ng-bootstrap";
 // Swiper Slider
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
@@ -23,16 +22,15 @@ import { EcommerceModule } from "./ecommerce/ecommerce.module";
 import { ArchwizardModule } from 'angular-archwizard';
 import { defineLordIconElement } from 'lord-icon-element';
 import lottie from 'lottie-web';
-import { FormsModule } from '@angular/forms';
+import { NgbNavModule } from "@ng-bootstrap/ng-bootstrap";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
-  direction: 'horizontal',
-  slidesPerView: 'auto'
+  direction: "horizontal",
+  slidesPerView: "auto",
 };
 
 @NgModule({
-  declarations: [
-    DashboardComponent
-  ],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     FlatpickrModule.forRoot(),
@@ -40,7 +38,6 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NgApexchartsModule,
     LeafletModule,
     NgbDropdownModule,
-    SimplebarAngularModule,
     PagesRoutingModule,
     SharedModule,
     WidgetModule,
@@ -50,17 +47,21 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     AppsModule,
     EcommerceModule,
     ArchwizardModule,
+    NgbNavModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
   ],
   providers: [
     {
       provide: SWIPER_CONFIG,
-      useValue: DEFAULT_SWIPER_CONFIG
-    }
+      useValue: DEFAULT_SWIPER_CONFIG,
+    },
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PagesModule {
   constructor() {
     defineLordIconElement(lottie.loadAnimation);
   }
- }
+}

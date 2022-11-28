@@ -29,6 +29,7 @@ import { CryptoComponent } from './crypto/crypto.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { NftComponent } from './nft/nft.component';
 import { ArchwizardModule } from 'angular-archwizard';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   slidesPerView: 'auto'
@@ -40,7 +41,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     CrmComponent,
     CryptoComponent,
     ProjectsComponent,
-    NftComponent
+    NftComponent,
   ],
   imports: [
     CommonModule,
@@ -56,13 +57,15 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     DashboardsRoutingModule,
     SharedModule,
     WidgetModule,
-    ArchwizardModule
+    ArchwizardModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {
       provide: SWIPER_CONFIG,
-      useValue: DEFAULT_SWIPER_CONFIG
-    }
-  ]
+      useValue: DEFAULT_SWIPER_CONFIG,
+    },
+  ],
 })
-export class DashboardsModule { }
+export class DashboardsModule {}

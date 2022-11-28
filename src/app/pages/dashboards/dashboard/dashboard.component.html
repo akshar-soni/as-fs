@@ -2,69 +2,176 @@
     <div class="col">
         <div class="h-100">
             <div class="row mb-3 pb-1">
-                <div class="col-12">
+                <div class="col-12 col-no-pad">
                     <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                         <div class="flex-grow-1">
-                            <!-- <h4 class="fs-16 mb-1">Welcome, Jim!</h4> -->
                             <div class="row">
                                 <div class="col-xl-12">
-                                    <div class="card">
-                                        <!-- <div class="card-header">
-                                            <h4 class="card-title mb-0">Fee Schedule</h4>
-                                        </div> -->
-                                        <div class="card-body form-steps">
-                                            <div class="text-center pt-3 pb-4 mb-1">
-                                                    <h5>Fee Schedule</h5>
-                                                </div>
+                                    <div class="card ">
+                                        <div class="card-header fw-semibold">
+                                            <h5 class="card-title mb-0 text-primary text-center">Fee Schedule</h5>
+                                        </div>
+                                        <div class="card-body form-steps wizard-cards">
+                                            <!-- <div class="text-center pt-3 pb-4 mb-1">
+                                                <h5>Fee Schedule</h5>
+                                            </div> -->
                                             <aw-wizard [navBarLayout]="'large-empty-symbols'" class="nav nav-pills progress-bar-tab custom-nav">
-
                                             <aw-wizard-step>
                                                 <ng-template awWizardStepSymbol>
                                                     <li class="nav-item" role="presentation">
                                                     <button class="nav-link rounded-pill active" data-progressbar="custom-progress-bar" id="pills-gen-info-tab" data-bs-toggle="pill" data-bs-target="#pills-gen-info" type="button" role="tab" aria-controls="pills-gen-info" aria-selected="true">1</button>
                                                     </li>
                                                 </ng-template>
-                                                <div>
-                                                    <div class="mb-4">
-                                                        <div class="text-center">
-                                                            <h5 class="mb-1">State</h5>
-                                                            <p class="text-muted">Select State</p>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-9">
+                                                        <div class="row d-flex">
+                                                            <div class="col-2 text-center d-flex justify-content-center align-items-center">
+                                                                <!-- <h5 class="mb-1 text-primary">Select State</h5> -->
+                                                                <span class="badge badge-soft-primary fs-16 select-lbl-lg">Select State</span>
+                                                                <!-- <p class="text-muted nm">Select State</p> -->
+                                                            </div>
+                                                            <div class="col-10">
+                                                                <form class="app-search d-md-block mx-auto ml-5">
+                                                                    <div class="position-relative">
+                                                                        <input type="text" class="form-control" placeholder="Search..." autocomplete="off" id="search-options" [(ngModel)]="searchInput" (ngModelChange)="searchinputChange($event)" [ngModelOptions]="{standalone: true}">
+                                                                        <span class="mdi mdi-magnify search-widget-icon"></span>
+                                                                        <span class="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none" id="search-close-options"></span>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                           
                                                         </div>
-
-                                                        <div class="row text-center justify-content-center" >
-                                                            <div class="col-12 flex-wrap">
-                                                                <div class="hstack">
-                                                                    <input type="radio" name="state" class="btn-check" id="btn-check-1" checked>
-                                                                    <label class="btn btn-outline-primary" for="btn-check-1">New York</label>
-
-                                                                    <input type="radio" name="state" class="btn-check" id="btn-check-2" >
-                                                                    <label class="btn btn-outline-primary" for="btn-check-2">Arizona</label>
-
-                                                                    <input type="radio" name="state" class="btn-check" id="btn-check-3">
-                                                                    <label class="btn btn-outline-primary" for="btn-check-3">Albama</label>
-
-                                                                    <input type="radio" name="state" class="btn-check" id="btn-check-4">
-                                                                    <label class="btn btn-outline-primary" for="btn-check-4">Georgia</label>
-
-                                                                    <input type="radio" name="state" class="btn-check" id="btn-check-5">
-                                                                    <label class="btn btn-outline-primary" for="btn-check-5">Illonis</label>
-
-                                                                    <input type="radio" name="state" class="btn-check" id="btn-check-6">
-                                                                    <label class="btn btn-outline-primary" for="btn-check-6">Florida</label>
-                                                                    
-                                                                    <input type="radio" name="state" class="btn-check" id="btn-check-7">
-                                                                    <label class="btn btn-outline-primary" for="btn-check-7">Texas</label>
+                                                        <!-- <div class="row d-flex mb-2 pl-5 pr-5">
+                                                            <form class="app-search d-md-block mx-auto ml-5">
+                                                                <div class="position-relative">
+                                                                    <input type="text" class="form-control" placeholder="Search..." autocomplete="off" id="search-options" value="">
+                                                                    <span class="mdi mdi-magnify search-widget-icon"></span>
+                                                                    <span class="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none" id="search-close-options"></span>
                                                                 </div>
+                                                            </form>
+                                                        </div> -->
+                                                        <!-- <div class="row"> -->
+                                                            <div class="row wizard-search-box">
+                                                                
+                                                                <!-- <ngx-simplebar  style="height: 508px;" class="px-3 mx-n3 mb-2"> -->
+                                                                    <div class="col-3" *ngFor="let state of getStateList()">
+                                                                    <input type="radio" class="btn-check ml-auto" name="options-outlined" id="btn-check-1" checked>
+                                                                    <label for="invoice-outlined" class="ms-auto w-100">
+                                                                        <div class="card card-body card-animate pe-auto p-3" (click)="onStateSelect(state)" >
+                                                                            <div class="d-flex mb-1 align-items-center">
+                                                                                <div class="flex-shrink-0 avatar-sm">
+                                                                                    <span class="avatar-title bg-light  display-3 rounded-circle fs-24" [class.bg-soft-primary]="state.isSelected" [class.text-primary]="state.isSelected">
+                                                                                        <i class="ri-checkbox-circle-fill"></i>
+                                                                                    </span>
+                                                                                </div>
+                                                                                <div class="flex-grow-1 ms-2">
+                                                                                    <h5 class="card-title mb-1">{{state.name}}</h5>
+                                                                                    <p class="text-muted mb-0">{{state.fname}}</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </label>
+                                                                </div>
+                                                                <!-- </ngx-simplebar> -->
+                                                            </div>
+                                                        <!-- </div> -->
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-xs-4 mt-sm-4">
+                                                        <div class="row">
+                                                            <div class="d-flex  align-items-center mb-3 col-md-9 col-lg-9">
+                                                                <!-- <div class="flex-shrink-0 avatar-xs me-2">
+                                                                    <span class="avatar-title bg-soft-primary text-primary rounded-circle fs-16">
+                                                                        <i class="ri-bill-circle align-middle me-2 "></i>
+                                                                    </span>
+                                                                </div> -->
+                                                                <h5 class="fs-14 text-primary mb-0 ml-4 ms-4"><i class="ri-bill-line align-middle me-2 fs-17 "></i> Fee Schedule Progress</h5>
                                                             </div>
                                                         </div>
+                                                            <div class="list-group">
+                                                                <button type="button" class="list-group-item list-group-item-action" disabled>
+                                                                    <div class="d-flex">
+                                                                        <div class="flex-shrink-0 avatar-xs me-2 ms-1">
+                                                                            <span class="avatar-title bg-soft-primary text-primary rounded-circle fs-16">
+                                                                                <i class="ri-checkbox-circle-fill"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class="flex-grow-1 text-muted fs-14">
+                                                                            <span class="text-muted me-2 fw-semibold opacity-60">State:</span>
+                                                                            <span class="badge badge-soft-primary fs-14">{{feeScheduleSummary?.state?.fname}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </button>
+                                                                <button type="button" class="list-group-item list-group-item-action" disabled>
+                                                                    <div class="d-flex">
+                                                                        <div class="flex-shrink-0 avatar-xs me-2 ms-1">
+                                                                            <span class="avatar-title bg-soft-primary text-primary rounded-circle fs-16">
+                                                                                <i class="ri-checkbox-circle-fill"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class="flex-grow-1 text-muted fs-14">
+                                                                            <span class="text-muted me-2 fw-semibold opacity-60">Foreclosure Type:</span>
+                                                                            <span class="badge badge-soft-primary fs-14">Judicial</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </button>
+                                                                <button type="button" class="list-group-item list-group-item-action" disabled>
+                                                                    <div class="d-flex">
+                                                                        <div class="flex-shrink-0 avatar-xs me-2 ms-1">
+                                                                            <span class="avatar-title bg-soft-primary text-primary rounded-circle fs-16">
+                                                                                <i class="ri-checkbox-circle-fill"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class="flex-grow-1 text-muted fs-14">
+                                                                            <span class="text-muted me-2 fw-semibold opacity-60">Loan Type:</span>
+                                                                            <span class="badge badge-soft-primary fs-14">FHA</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </button>
+                                                                <button type="button" class="list-group-item list-group-item-action" disabled>
+                                                                    <div class="d-flex">
+                                                                        <div class="flex-shrink-0 avatar-xs me-2 ms-1">
+                                                                            <span class="avatar-title bg-soft-primary text-primary rounded-circle fs-16">
+                                                                                <i class="ri-checkbox-circle-fill"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class="flex-grow-1 text-muted fs-14">
+                                                                            <span class="text-muted me-2 fw-semibold opacity-60">Investor Type:</span>
+                                                                            <span class="badge badge-soft-primary fs-14">USDA</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </button>
+                                                                <button type="button" class="list-group-item list-group-item-action" disabled>
+                                                                    <div class="d-flex">
+                                                                        <div class="flex-shrink-0 avatar-xs me-2 ms-1">
+                                                                            <span class="avatar-title bg-soft-danger text-danger rounded-circle fs-16">
+                                                                                <i class="ri-close-circle-fill"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class="flex-grow-1 text-muted fs-14 opacity-60">
+                                                                            <span class="text-muted me-2 fw-semibold opacity-60">Client:</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </button>
+                                                                <button type="button" class="list-group-item list-group-item-action" disabled>
+                                                                    <div class="d-flex">
+                                                                        <div class="flex-shrink-0 avatar-xs me-2 ms-1">
+                                                                            <span class="avatar-title bg-soft-danger text-danger rounded-circle fs-16">
+                                                                                <i class="ri-close-circle-fill"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class="flex-grow-1 text-muted fs-14 opacity-60">
+                                                                            <span class="text-muted me-2 fw-semibold opacity-60">Milestone:</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </button>
+                                                            </div>
                                                     </div>
                                                 </div>
-                                                <!-- wizard-tab -->
-                                                <div class="d-flex align-items-start gap-3 mt-4">
-                                                    <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="pills-info-desc-tab" awNextStep><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Next</button>
+                                                <div class="wizard-action-div">
+                                                        <!-- <button type="button" class="btn btn-light btn-label previestab"  awPreviousStep><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i>Back</button> -->
+                                                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab"  awNextStep><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Next</button>
                                                 </div>
                                             </aw-wizard-step>
-
                                             <aw-wizard-step>
                                                 <ng-template awWizardStepSymbol>
                                                     <li class="nav-item" role="presentation">
@@ -77,10 +184,9 @@
                                                             <h5 class="mb-1">Foreclosure Type</h5>
                                                             <p class="text-muted">Select Foreclosure Type</p>
                                                         </div>
-
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <div class="hstack gap-2 flex-wrap">
+                                                        <div class="row text-center">
+                                                            <div class="col-12 flex-wrap">
+                                                                <div class="hstack">
                                                                     <input type="radio" name="foreclosure" class="btn-check" id="foreclosure-1" checked>
                                                                     <label class="btn btn-outline-primary" for="foreclosure-1">Judicial</label>
                                                                     <input type="radio" name="foreclosure" class="btn-check" id="foreclosure-2" >
@@ -88,16 +194,13 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                 </div>
-                                                <!-- wizard-tab -->
-                                                <div class="d-flex align-items-start gap-3 mt-4">
-                                                    <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="pills-3" awNextStep><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Next</button>
+                                                <div class="d-flex align-items-start wizard-action-div">
+                                                    <button type="button" class="btn btn-light btn-label previestab"  awPreviousStep><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i>Back</button>
+                                                    <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab"  awNextStep><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Next</button>
                                                 </div>
                                             </aw-wizard-step>
-
-
                                             <aw-wizard-step>
                                                 <ng-template awWizardStepSymbol>
                                                     <li class="nav-item" role="presentation">
@@ -110,7 +213,7 @@
                                                             <h5 class="mb-1">Loan Type</h5>
                                                             <p class="text-muted">Select Loan Type</p>
                                                         </div>
-                                                        <div class="row">
+                                                        <div class="row text-center">
                                                             <div class="col-12">
                                                                 <div class="hstack gap-2 flex-wrap">
                                                                     <input type="radio" name="LoanType" class="btn-check" id="LoanType-1" checked>
@@ -124,8 +227,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="d-flex align-items-start gap-3 mt-4">
-                                                    <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="pills-4" awNextStep><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Next</button>
+                                                <div class="wizard-action-div">
+                                                    <button type="button" class="btn btn-light btn-label previestab"  awPreviousStep><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i>Back</button>
+                                                    <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab"  awNextStep><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Next</button>
                                                 </div>
                                             </aw-wizard-step>
 
@@ -158,8 +262,9 @@
                                                     </div>
                                                 </div>
                                                 <!-- wizard-tab -->
-                                                <div class="d-flex align-items-start gap-3 mt-4">
-                                                    <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="pills-5" awNextStep><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Next</button>
+                                                <div class="wizard-action-div">
+                                                    <button type="button" class="btn btn-light btn-label previestab"  awPreviousStep><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i>Back</button>
+                                                    <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab"  awNextStep><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Next</button>
                                                 </div>
                                             </aw-wizard-step>
 
@@ -175,7 +280,7 @@
                                                             <h5 class="mb-1">Client</h5>
                                                             <p class="text-muted">Select Client</p>
                                                         </div>
-                                                        <div class="row">
+                                                        <div class="row text-center">
                                                             <div class="col-12">
                                                                 <div class="hstack gap-2 flex-wrap">
                                                                     <input type="radio" name="Client" class="btn-check" id="Client-1" checked>
@@ -210,8 +315,9 @@
                                                     </div>
                                                 </div>
                                                 <!-- wizard-tab -->
-                                                <div class="d-flex align-items-start gap-3 mt-4">
-                                                    <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="pills-5" awNextStep><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Next</button>
+                                                <div class="wizard-action-div">
+                                                    <button type="button" class="btn btn-light btn-label previestab"  awPreviousStep><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i>Back</button>
+                                                    <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab"  awNextStep><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Next</button>
                                                 </div>
                                             </aw-wizard-step>
 
@@ -227,7 +333,7 @@
                                                             <h5 class="mb-1">Milestone</h5>
                                                             <p class="text-muted">Select Milestone</p>
                                                         </div>
-                                                        <div class="row">
+                                                        <div class="row text-center">
                                                             <div class="col-12">
                                                                 <div class="hstack gap-2 flex-wrap">
                                                                     <input type="radio" name="milestone" class="btn-check" id="milestone-1" checked>
@@ -253,8 +359,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="d-flex align-items-start gap-3 mt-4">
-                                                    <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="pills-6" awNextStep><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Submit</button>
+                                                <!-- <div class="d-flex align-items-start gap-3 mt-4 wizard-next-btn">
+                                                    <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" awNextStep><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Submit</button>
+                                                </div> -->
+                                                <div class="wizard-action-div">
+                                                    <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" awNextStep><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Submit</button>
                                                 </div>
                                             </aw-wizard-step>
 
@@ -264,134 +373,130 @@
                                                     <button class="nav-link rounded-pill" data-progressbar="custom-progress-bar" id="pills-7" data-bs-toggle="pill" data-bs-target="#pills-7" type="button" role="tab" aria-controls="pills-7" aria-selected="false">7</button>
                                                     </li>
                                                 </ng-template>
-                                                        <div class="mb-2">
-                                                            <div class="row">
-                                                                <div class="col-xl-3 col-md-6">
-                                                                    <div class="card card-animate">
-                                                                        <div class="card-body">
-                                                                            <div class="d-flex align-items-center">
-                                                                                <div class="flex-grow-1">
-                                                                                    <p class="text-uppercase fw-semibold text-muted mb-0">Total Allowable Amount</p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                                                                <div>
-                                                                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span [CountTo]="1800.25" class="counter-value" [from]="0" [duration]="1"></span>k</h4>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div><!-- end card body -->
+                                                <div class="mb-2">
+                                                    <div class="row">
+                                                        <div class="col-xl-3 col-md-6">
+                                                            <div class="card card-animate">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="flex-grow-1">
+                                                                            <p class="text-uppercase fw-semibold text-muted mb-0">Total Allowable Amount</p>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-xl-3 col-md-6">
-                                                                    <div class="card card-animate">
-                                                                        <div class="card-body">
-                                                                            <div class="d-flex align-items-center">
-                                                                                <div class="flex-grow-1">
-                                                                                    <p class="text-uppercase fw-semibold text-muted mb-0">Allowable %</p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                                                                <div>
-                                                                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span [CountTo]="300" class="counter-value" [from]="0" [duration]="1"></span>%</h4>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div><!-- end card body -->
+                                                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                                                        <div>
+                                                                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span [CountTo]="1800.25" class="counter-value" [from]="0" [duration]="1"></span>k</h4>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-xl-3 col-md-6">
-                                                                    <div class="card card-animate">
-                                                                        <div class="card-body">
-                                                                            <div class="d-flex align-items-center">
-                                                                                <div class="flex-grow-1">
-                                                                                    <p class="text-uppercase fw-semibold text-muted mb-0">Milestone Allowable Amount</p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                                                                <div>
-                                                                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span [CountTo]="540" class="counter-value" [from]="0" [duration]="1"></span>k</h4>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div><!-- end card body -->
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xl-3 col-md-6">
-                                                                    <div class="card card-animate">
-                                                                        <div class="card-body">
-                                                                            <div class="d-flex align-items-center">
-                                                                                <div class="flex-grow-1">
-                                                                                    <p class="text-uppercase fw-semibold text-muted mb-0">Invoiceable Amount</p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                                                                <div>
-                                                                                    <h4 class="fs-18 fw-semibold ff-secondary mb-4">
-                                                                                        N/A
-                                                                                    </h4>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div><!-- end card body -->
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xl-3 col-md-6">
-                                                                    <div class="card card-animate">
-                                                                        <div class="card-body">
-                                                                            <div class="d-flex align-items-center">
-                                                                                <div class="flex-grow-1 text-muted">
-                                                                                    <p class="text-uppercase fw-semibold mb-0">Instruction (Milestone)</p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                                                                <div class="text-muted">
-                                                                                    <p class="fs-18 text-muted ff-secondary mb-4">
-                                                                                        N/A
-                                                                                    </p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div><!-- end card body -->
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xl-3 col-md-6">
-                                                                    <div class="card card-animate">
-                                                                        <div class="card-body">
-                                                                            <div class="d-flex align-items-center">
-                                                                                <div class="flex-grow-1 text-muted">
-                                                                                    <p class="text-uppercase fw-semibold mb-0">Instruction (Section)</p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                                                                    <p class="fs-18 text-muted ff-secondary mb-4">
-                                                                                        N/A
-                                                                                    </p>
-                                                                            </div>
-                                                                        </div><!-- end card body -->
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xl-6 col-md-6">
-                                                                    <div class="card card-animate">
-                                                                        <div class="card-body">
-                                                                            <div class="d-flex align-items-center">
-                                                                                <div class="flex-grow-1">
-                                                                                    <p class="text-uppercase fw-semibold text-muted mb-0">Instruction (Loan Type)</p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                                                                <p class="fs-18 text-muted ff-secondary mb-4">
-                                                                                    *If the Loan Type is FHA,and the investor is either FNMA,bill fees accordingly
-                                                                                </p>
-                                                                            </div>
-                                                                        </div><!-- end card body -->
-                                                                    </div>
-                                                                </div>
-                                                                <div class="text-center pt-4 pb-2">
-                                                                    <div class="mb-4">
-                                                                        <lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop" colors="primary:#0ab39c,secondary:#405189" style="width:120px;height:120px"></lord-icon>
-                                                                    </div>
-                                                                    <h5>Your Fee Schedule is Completed !</h5>
-                                                                    <p class="text-muted">You will receive confirmation email with details of your schedule.</p>
-                                                                  </div>
-
+                                                                </div><!-- end card body -->
                                                             </div>
                                                         </div>
+                                                        <div class="col-xl-3 col-md-6">
+                                                            <div class="card card-animate">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="flex-grow-1">
+                                                                            <p class="text-uppercase fw-semibold text-muted mb-0">Allowable %</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                                                        <div>
+                                                                            <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span [CountTo]="300" class="counter-value" [from]="0" [duration]="1"></span>%</h4>
+                                                                        </div>
+                                                                    </div>
+                                                                </div><!-- end card body -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-3 col-md-6">
+                                                            <div class="card card-animate">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="flex-grow-1">
+                                                                            <p class="text-uppercase fw-semibold text-muted mb-0">Milestone Allowable Amount</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                                                        <div>
+                                                                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span [CountTo]="540" class="counter-value" [from]="0" [duration]="1"></span>k</h4>
+                                                                        </div>
+                                                                    </div>
+                                                                </div><!-- end card body -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-3 col-md-6">
+                                                            <div class="card card-animate">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="flex-grow-1">
+                                                                            <p class="text-uppercase fw-semibold text-muted mb-0">Invoiceable Amount</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                                                        <div>
+                                                                            <h4 class="fs-18 fw-semibold ff-secondary mb-4">
+                                                                                N/A
+                                                                            </h4>
+                                                                        </div>
+                                                                    </div>
+                                                                </div><!-- end card body -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-3 col-md-6">
+                                                            <div class="card card-animate">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="flex-grow-1 text-muted">
+                                                                            <p class="text-uppercase fw-semibold mb-0">Instruction (Milestone)</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                                                        <div class="text-muted">
+                                                                            <p class="fs-18 text-muted ff-secondary mb-4">
+                                                                                N/A
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div><!-- end card body -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-3 col-md-6">
+                                                            <div class="card card-animate">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="flex-grow-1 text-muted">
+                                                                            <p class="text-uppercase fw-semibold mb-0">Instruction (Section)</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                                                            <p class="fs-18 text-muted ff-secondary mb-4">
+                                                                                N/A
+                                                                            </p>
+                                                                    </div>
+                                                                </div><!-- end card body -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6 col-md-6">
+                                                            <div class="card card-animate">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="flex-grow-1">
+                                                                            <p class="text-uppercase fw-semibold text-muted mb-0">Instruction (Loan Type *)</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                                                        <p class="fs-18 text-muted ff-secondary mb-4">
+                                                                            If the Loan Type is FHA,and the investor is either FNMA,bill fees accordingly
+                                                                        </p>
+                                                                    </div>
+                                                                </div><!-- end card body -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-center pt-2 pb-2 mt-2">
+                                                            <h5>Your Fee Schedule is Completed !</h5>
+                                                            <p class="text-muted">You will receive confirmation email with details of your schedule.</p>
+                                                            </div>
+                                                    </div>
+                                                </div>
                                                         
                                             </aw-wizard-step>
 
