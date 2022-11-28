@@ -16,9 +16,7 @@ import { defineLordIconElement } from 'lord-icon-element';
 import lottie from 'lottie-web';
 
 // Calendar package
-import { FullCalendarModule } from '@fullcalendar/angular';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
+
 // Flat Picker
 import { FlatpickrModule } from 'angularx-flatpickr';
 // Simplebar
@@ -48,11 +46,6 @@ import {DatePipe} from '@angular/common';
 
 import { SortByPipe } from '../apps/sort-by.pipe';
 
-FullCalendarModule.registerPlugins([
-  dayGridPlugin,
-  interactionPlugin
-]);
-
 @NgModule({
   declarations: [SortByPipe],
   imports: [
@@ -67,7 +60,6 @@ FullCalendarModule.registerPlugins([
     NgbPaginationModule,
     NgbCollapseModule,
     FeatherModule.pick(allIcons),
-    FullCalendarModule,
     FlatpickrModule.forRoot(),
     CKEditorModule,
     CountToModule,
